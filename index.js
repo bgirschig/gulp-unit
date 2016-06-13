@@ -1,5 +1,5 @@
 var through = require('through2');
-var Testing = require('testing')
+var Testing = require('./node-testing.js')
 
 const PLUGIN_NAME = 'gulp-testing';
 

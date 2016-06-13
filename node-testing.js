@@ -1,9 +1,9 @@
 // node unit testing
 var colors = require('colors');
 
-var Testing = {};
+var nodeTesting = {};
 (function(){
-	Testing = {
+	nodeTesting = {
 		currentTest:null,
 		// result arrays
 		passed:[],
@@ -13,12 +13,12 @@ var Testing = {};
 	}
 
 	// Test handling functions
-	Testing.addTest = function(name, testFunction){
+	nodeTesting.addTest = function(name, testFunction){
 		if(this.tests[name]!=null)
 			console.log(("Test '"+name+"' is defined multiple times. last declaration will prevail").red);
 		this.tests[name] = testFunction;
 	}
-	Testing.reset = function(){
+	nodeTesting.reset = function(){
 		this.passed = [];
 		this.failed = [];
 		this.currentTest = null;
@@ -26,45 +26,45 @@ var Testing = {};
 	}
 
 	// Testing functions
-	Testing.equals = function(actual, expected){
+	nodeTesting.equals = function(actual, expected){
 		if(actual==expected) this.passed.push(this.currentTest);
 		else this.failed.push(this.currentTest);
 	}
-	Testing.notEquals = function(actual, expected){
+	nodeTesting.notEquals = function(actual, expected){
 		if(actual!=expected) this.passed.push(this.currentTest);
 		else this.failed.push(this.currentTest);
 	}
-	Testing.isTrue = function(value){
+	nodeTesting.isTrue = function(value){
 		if(value) this.passed.push(this.currentTest);
 		else this.failed.push(this.currentTest);
 	}
-	Testing.isFalse = function(value){
+	nodeTesting.isFalse = function(value){
 		if(!value) this.passed.push(this.currentTest);
 		else this.failed.push(this.currentTest);
 	}
 
-	Testing.run = function(name){
+	nodeTesting.run = function(name){
 		// execute tests
-		for(var testName in Testing.tests){
-			Testing.currentTest = testName;
-			Testing.tests[testName]();
+		for(var testName in nodeTesting.tests){
+			nodeTesting.currentTest = testName;
+			nodeTesting.tests[testName]();
 		}
 		logResults(name);
-		Testing.reset();
+		nodeTesting.reset();
 	}
 	function logResults(groupName){
 		if (groupName == null) groupName = "Unit tests";
 		console.log("\n"+groupName.bold);
 		
-		for (var i = 0; i < Testing.passed.length; i++){
-			console.log(("√ Test passed: "+Testing.passed[i]).green);
+		for (var i = 0; i < nodeTesting.passed.length; i++){
+			console.log(("√ Test passed: "+nodeTesting.passed[i]).green);
 		}
-		for (var i = 0; i < Testing.failed.length; i++){
-			console.log(("✖ Test failed: "+Testing.failed[i]).red);
+		for (var i = 0; i < nodeTesting.failed.length; i++){
+			console.log(("✖ Test failed: "+nodeTesting.failed[i]).red);
 		}
 		// Test statistics
-		var passedCount = Testing.passed.length;
-		var failedCount = Testing.failed.length;
+		var passedCount = nodeTesting.passed.length;
+		var failedCount = nodeTesting.failed.length;
 		if(failedCount==0){
 			console.log("=> "+"all tests passed".green.bold);
 		} else{
@@ -72,7 +72,5 @@ var Testing = {};
 		}
 	}
 
-	if(!isBrowser){
-		module.exports = Testing;
-	}
+	module.exports = nodeTesting;
 })();

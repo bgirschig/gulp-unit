@@ -9,7 +9,6 @@
   "author": "Bastien Girschig <bastien.girschig@gmail.com> (http://www.bastiengirschig.fr)",
   "license": "MIT",
   "dependencies": {
-    "gulp-util": "^3.0.7",
     "through2": "^2.0.1"
   }
 }
